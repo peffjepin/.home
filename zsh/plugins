@@ -1,0 +1,17 @@
+HERE=$( dirname "$0" )
+DEPS=$HOME/.home/deps
+
+# Prompt customization
+fpath+=$DEPS/pure
+PURE_PROMPT_SYMBOL='$'
+PURE_PROMPT_VICMD_SYMBOL='vi'
+autoload -U promptinit; promptinit
+prompt pure
+zstyle :prompt:pure:path color white
+zstyle ':prompt:pure:prompt:*' color $GREEN_L
+# end prompt
+
+fpath=($DEPS/zsh-completions/src $fpath)
+source $DEPS/zsh-autosuggestions/zsh-autosuggestions.zsh
+# IMPORTANT: this one should be last
+source $DEPS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

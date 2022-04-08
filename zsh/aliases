@@ -1,0 +1,41 @@
+#!/usr/bin/sh
+
+if command -v pacman >/dev/null 2>&1; then
+    alias search="pacman -Ss"
+    alias update="sudo pacman -Syu"
+    alias install="sudo pacman -S"
+    alias uninstall="sudo pacman -Rns"
+    alias query="pacman -Qi"
+elif command -v apt-get >/dev/null 2>&1; then
+    alias search="apt-cache search"
+    alias update="sudo apt-get update && apt-get upgrade"
+    alias install="sudo apt-get install"
+    alias uninstall="sudo apt-get --purge autoremove"
+fi
+
+alias venv=". venv/bin/activate"
+alias tdd="python ~/dev/autotest/tdd.py"
+alias gamelib="cd ~/dev/gamelib && venv"
+alias gamelib-black="gamelib && black gamelib && black tests"
+alias gamelib-code="gamelib && cd gamelib && vim"
+alias gamelib-test="gamelib && cd tests && vim"
+alias gamelib-tdd="gamelib && tdd tests gamelib"
+alias gamelib-install="gamelib && python setup.py install"
+alias gamelib-ipython="gamelib-install && clear && ipython"
+alias peffjepin.com="cd ~/dev/portfolio && venv"
+alias dev="cd ~/dev && vim"
+alias sandbox="cd ~/dev/sandbox && ./new"
+alias pytree="tree -I __pycache__"
+alias stash-home="mv ~/.git ~/.githome"
+alias checkout-home="mv ~/.githome ~/.git"
+
+alias lsa="ls -lah --color=auto"
+alias ..="cd .."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
+
+alias moon="curl wttr.in/moon"
+alias wttr="curl wttr.in/"
+
+alias jrnl="journal.py --bullet"
