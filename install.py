@@ -36,10 +36,10 @@ def make_symlink(file, target):
             backup_path = BACKUP / target
             backup_path.parent.mkdir(exist_ok=True, parents=True)
             shutil.move(target_path, backup_path)
-    init_path.symlink_to(target_path)
+    target_path.symlink_to(init_path)
 
 
-def clone_repo(url)
+def clone_repo(url):
     os.system(f"cd {DEPS} && git clone {url}")
 
 
