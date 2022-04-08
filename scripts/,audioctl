@@ -1,0 +1,10 @@
+#!/bin/sh
+
+MAGNITUDE="${2:-5}"
+
+case $1 in
+    up) pulsemixer --change-volume +$MAGNITUDE ;;
+    down) pulsemixer --change-volume -$MAGNITUDE ;;
+    mute) pulsemixer --toggle-mute ;;
+esac
+

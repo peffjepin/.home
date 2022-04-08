@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+rankmirrors --verbose /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist

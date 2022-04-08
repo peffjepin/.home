@@ -1,0 +1,13 @@
+#!/bin/bash
+
+reflector \
+    --verbose \
+    --protocol https \
+    --latest 75 \
+    --age 24 \
+    --fastest 30 \
+    --sort rate \
+    --save /etc/pacman.d/mirrorlist 
+
+cat /etc/pacman.d/mirrorlist 
+pacman -Syyu

@@ -23,6 +23,7 @@ symlinks = (
     ("zsh/.zshenv", ".zshenv"),
     ("zsh", ".config/zsh"),
     ("kitty", ".config/kitty"),
+    ("scripts", "scripts")
 )
 
 

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+spotify_cmd() {
+    dbus-send \
+        --print-reply \
+        --dest=org.mpris.MediaPlayer2.spotify \
+        /org/mpris/MediaPlayer2 \
+        org.mpris.MediaPlayer2.Player.$1
+}
+
+case $1 in
+    play) spotify_cmd Play ;;
+    pause) spotify_cmd Pause ;;
+    toggle) spotify_cmd PlayPause ;;
+    next) spotify_cmd Next ;;
+    prev) spotify_cmd Previous ;;
+esac

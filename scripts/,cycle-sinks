@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# get a list of all available sink indices
+sinks=($(pacmd list-sinks | grep index | cut -d ':' -f2 | xargs))
+num_sinks=$(pacmd list-sinks | grep index | wc -l)
+
+# find which index in the sink array corresponds to the default sink
+default=$(pacmd list-sinks | grep "*" | cut -d ':' -f2 | xargs)
+default_array_index=-1
+for i in "${!sinks[@]}"; do
+    if [[ "${sinks[$i]}" = $default ]];
+    then 
+        default_array_index=$i
+        break
+    fi
+done
+
+# change default sink to the next available sink
+new_sink_idx=$((($default_array_index + 1) % $num_sinks))
+new_sink="${sinks[$new_sink_idx]}"
+pacmd set-default-sink $new_sink
+
+# change all sink inputs to new sink
+inputs=($(pacmd list-sink-inputs | grep index | cut -d ':' -f2 | xargs))
+for i in "${inputs[@]}"; do
+    pacmd move-sink-input $i $new_sink
+done
