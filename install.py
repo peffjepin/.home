@@ -22,6 +22,7 @@ symlinks = (
     ("vim", ".vim"),
     ("zsh/.zshenv", ".zshenv"),
     ("zsh", ".config/zsh"),
+    ("kitty", ".config/kitty"),
 )
 
 
