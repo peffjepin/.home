@@ -35,5 +35,5 @@ export ORANGE_D="#d65d0e"
 # Source other files
 source $ZDOTDIR/paths
 source $ZDOTDIR/plugins
-source $ZDOTDIR/funcs
+source $ZDOTDIR/functions
 source $ZDOTDIR/aliases
