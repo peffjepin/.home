@@ -1,0 +1,10 @@
+shift + ctrl {Left,Right,space}
+    ,spotifyctl {prev,next,toggle}
+
+shift + ctrl {Up,Down}
+    ,audioctl {up,down}
+
+shift + alt + ctrl + Down
+    ,audioctl mute
+
+
