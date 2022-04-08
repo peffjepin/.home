@@ -1,56 +1,50 @@
 #!/usr/bin/env python3
 
-import subprocess
-import pathlib
-import shlex
 import os
-
-from dataclasses import dataclass
-from subprocess import DEVNULL
-
+import pathlib
+import shutil
 
 BASE = pathlib.Path(__file__).parent
+HOME = pathlib.Path.home()
 DEPS = BASE / "deps"
 BACKUP = BASE / "backup"
 
 
-@dataclass
-class PackageManager:
-    lookup = dict()
+repos = (
+    "https://github.com/zsh-users/zsh-autosuggestions",
+    "https://github.com/zsh-users/zsh-syntax-highlighting",
+    "https://github.com/zsh-users/zsh-completions",
+    "https://github.com/sindresorhus/pure",
+)
 
-    name: str
-    install: str
-
-    @classmethod
-    def get_pkg_name(cls, name):
-        from_lookup = cls.lookup.get(name)
-        return from_lookup if from_lookup is not None else name
-
-    @classmethod
-    def get_for_system(cls):
-        for pm in cls.__subclasses__():
-            cmd = shlex.split(f"which {pm.name}")
-            p = subprocess.run(cmd, stdout=DEVNULL, stderr=DEVNULL)
-            if p.returncode == 0:
-                return pm
-
-        raise ValueError("Could not determine which package manager to use.")
+# links to make: (relative to .git, relative to $HOME)
+symlinks = (
+    ("vim", ".vim"),
+    ("zsh/.zshenv", ".zshenv"),
+    ("zsh", ".config/zsh"),
+)
 
 
-class AptGet(PackageManager):
-    name = "apt-get"
-    install = "apt-get update && apt-get install"
+def make_symlink(file, target):
+    init_path = BASE / file
+    target_path = HOME / target
+    if target_path.exists():
+        if target_path.is_symlink():
+            target_path.unlink()
+        else:
+            print(f"backing up {target_path}")
+            backup_path = BACKUP / target
+            backup_path.parent.mkdir(exist_ok=True, parents=True)
+            shutil.move(target_path, backup_path)
+    init_path.symlink_to(target_path)
 
 
-class Pacman(PackageManager):
-    name = "pacman"
-    install = "pacman -Syu"
-
-
-def install_software(*packages: str):
-    pkgman = PackageManager.get_for_system()
-    os.system(f"{pkgman.install} {' '.join(packages)}")
+def clone_repo(url)
+    os.system(f"cd {DEPS} && git clone {url}")
 
 
 if __name__ == "__main__":
-    install_software("vim", "zsh", "ranger", "sxhkd")
+    for url in repos:
+        clone_repo(url)
+    for pair in symlinks:
+        make_symlink(*pair)
