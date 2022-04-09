@@ -30,7 +30,7 @@ set autoread
 set smartindent
 set autochdir
 set nu
-set wrap
+set nowrap
 set linebreak
 set smartcase
 set noswapfile
@@ -76,7 +76,7 @@ nnoremap <Leader>br i<CR><Esc>ji<Backspace><Esc>^
 nnoremap <Leader>y "+y
 nnoremap <Leader>p "+p
 
-" navigate splits with ctrl+h/j/k/l
+" escape normal mode with jj/kk
 inoremap jj <Esc>
 inoremap kk <Esc>
 

@@ -1,3 +1,4 @@
+
 shift + ctrl {Left,Right,space}
     ,spotifyctl {prev,next,toggle}
 
@@ -7,4 +8,14 @@ shift + ctrl {Up,Down}
 shift + alt + ctrl + Down
     ,audioctl mute
 
+super + Return
+    $TERMINAL
 
+super + p
+    $TERMINAL ipython
+
+super + i
+    $BROWSER
+
+super + m
+    ,cycle_sinks

@@ -55,4 +55,6 @@ def install_software(*packages: str):
 
 
 if __name__ == "__main__":
-    install_software("vim", "zsh", "ranger", "sxhkd")
+    with open("packages", "r") as f:
+        packages = (l.strip() for l in f.readlines())
+    install_software(*packages)

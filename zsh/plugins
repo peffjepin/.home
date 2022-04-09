@@ -1,3 +1,5 @@
+#!/bin/sh
+
 HERE=$( dirname "$0" )
 DEPS=$HOME/.home/deps
 
@@ -8,7 +10,7 @@ PURE_PROMPT_VICMD_SYMBOL='vi'
 autoload -U promptinit; promptinit
 prompt pure
 zstyle :prompt:pure:path color white
-zstyle ':prompt:pure:prompt:*' color $GREEN_L
+zstyle ':prompt:pure:prompt:*' color $COLORSCHEME_GREEN_L
 # end prompt
 
 fpath=($DEPS/zsh-completions/src $fpath)
