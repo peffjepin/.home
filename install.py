@@ -25,6 +25,7 @@ symlinks = (
     ("kitty", ".config/kitty"),
     ("scripts", "scripts"),
     ("sxhkd", ".config/sxhkd"),
+    ("qtile", ".config/qtile"),
 )
 
 
