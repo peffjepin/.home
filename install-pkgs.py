@@ -40,6 +40,7 @@ class PackageManager:
 
 
 class AptGet(PackageManager):
+    lookup = {"qtile": ""}
     name = "apt-get"
     install = "apt-get update && apt-get install"
 
@@ -51,7 +52,8 @@ class Pacman(PackageManager):
 
 def install_software(*packages: str):
     pkgman = PackageManager.get_for_system()
-    os.system(f"{pkgman.install} {' '.join(packages)}")
+    cleaned = " ".join(map(pkgman.get_pkg_name, packages))
+    os.system(f"{pkgman.install} {cleaned}")
 
 
 if __name__ == "__main__":

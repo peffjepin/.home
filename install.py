@@ -4,7 +4,7 @@ import os
 import pathlib
 import shutil
 
-BASE = pathlib.Path(__file__).parent
+BASE = pathlib.Path(__file__).parent.resolve()
 HOME = pathlib.Path.home()
 DEPS = BASE / "deps"
 BACKUP = BASE / "backup"
@@ -32,14 +32,17 @@ symlinks = (
 def make_symlink(file, target):
     init_path = BASE / file
     target_path = HOME / target
-    if target_path.exists():
-        if target_path.is_symlink():
-            target_path.unlink()
-        else:
-            print(f"backing up {target_path}")
-            backup_path = BACKUP / target
-            backup_path.parent.mkdir(exist_ok=True, parents=True)
-            shutil.move(target_path, backup_path)
+    
+    if target_path.is_symlink():
+        target_path.unlink()
+    elif target_path.exists():
+        print(f"backing up {target_path}")
+        backup_path = BACKUP / target
+        backup_path.parent.mkdir(exist_ok=True, parents=True)
+        shutil.move(target_path, backup_path)
+
+    print(target_path.exists())
+    print(f"creating symlink: {init_path} -> {target_path}")
     target_path.symlink_to(init_path)
 
 
