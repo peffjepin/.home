@@ -1,12 +1,69 @@
 #!/usr/bin/env python3
 
 import sys
-from pprint import pprint
+import argparse
 
-cmd = sys.argv[1]
+_print = print
+imports = ["import numpy as np"]
 
-if sys.stdin.isatty():
-    exec(cmd)
-else:
-    stdin = sys.stdin.read()
-    exec(cmd)
+
+def main(args):
+    if args.bout:
+
+        def print(s):
+            if isinstance(s, str):
+                sys.stdout.buffer.write(bytes(s, "utf-8"))
+            else:
+                sys.stdout.buffer.write(bytes(s))
+
+    else:
+
+        def print(s):
+            sys.stdout.write(str(s))
+
+    if args.minimal:
+        if args.np:
+            import numpy as np
+    else:
+        for string in imports:
+            try:
+                # put imports in globals instead of locals
+                exec(string, globals(), globals())
+            except ModuleNotFoundError:
+                pass
+
+    if sys.stdin.isatty():
+        assert args.code, "some code must be given for execution"
+        exec(args.code)
+    else:
+        if args.bin:
+            stdin = sys.stdin.buffer.read()
+        else:
+            stdin = sys.stdin.read()
+
+        # stdin can be interpreted as the code to be executed if
+        # no code was passed in as a command line argument
+        exec(args.code or stdin)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--bin", action="store_true", help="stdin will be read as bytes"
+    )
+    parser.add_argument(
+        "--bout", action="store_true", help="stdout will be written as bytes"
+    )
+    parser.add_argument(
+        "--minimal", action="store_true", help="will limit excessive setup"
+    )
+    parser.add_argument(
+        "--np", action="store_true", help="enforce numpy import"
+    )
+    parser.add_argument(
+        "code", default="", help="the python code to be executed"
+    )
+
+    args = parser.parse_args()
+    exitcode = main(args)
+    raise SystemExit(exitcode)
