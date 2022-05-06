@@ -42,6 +42,7 @@ def make_symlink(file, dest):
         move_to_backup_directory(dest_path, backup_path)
 
     print(f"creating symlink: {init_path} -> {dest_path}")
+    dest_path.parent.mkdir(exist_ok=True, parents=True)
     dest_path.symlink_to(init_path)
 
 

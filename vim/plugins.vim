@@ -1,4 +1,4 @@
-let g:enable_ycm=1
+let g:enable_ycm=0
 
 call plug#begin()
 Plug 'Yggdroot/indentLine'
