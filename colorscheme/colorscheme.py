@@ -32,22 +32,24 @@ class TerminalPallette:
     #   if name starts with 'CS_' the value is a color code (int <= 255)
     env: dict[str, str]
 
-    def __init__(self, theme):
+    def __init__(self, theme, high_contrast=False):
         self.colors = dict()
         self.env = dict()
 
+        self._theme = theme
+        self._high_contrast = high_contrast
         self._definition_lines = list()
         self._generation_lines = list()
         self._code_generator = self._color_code_generator()
-        self._handle_theme(theme)
+        self._handle_theme()
 
     def process(self):
         self._read_config()
         self._process_color_definitions()
         self._process_generation_directives()
 
-    def _handle_theme(self, theme):
-        if theme == DARK:
+    def _handle_theme(self):
+        if self._theme == DARK:
             self._bg_color_code = MAP16["black"]
             self._generation_lines.append("!foreground white")
         else:
@@ -79,6 +81,11 @@ class TerminalPallette:
             code: color
             for color, code in map(str.split, self._definition_lines)
         }
+        for color, code in map(str.split, self._definition_lines):
+            if self._high_contrast and (code != self._bg_color_code):
+                self.colors[code] = contrast_against_theme(color, self._theme)
+            else:
+                self.colors[code] = color
 
     def _process_generation_directives(self):
         self.env = {
@@ -142,6 +149,12 @@ def hsv_to_hexstr(hsv):
     return f"#{rx}{gx}{bx}"
 
 
+def contrast_against_theme(hexstr, theme, weight=WEIGHT):
+    contrast_v = 1 if theme == DARK else 0
+    h, s, v = hexstr_to_hsv(hexstr)
+    return hsv_to_hexstr((h, s, lerp(v, contrast_v, weight)))
+
+
 def high_contrast(hexstr, bg_hexstr, weight=WEIGHT):
     h1, s1, v1 = hexstr_to_hsv(hexstr)
     _, s2, v2 = hexstr_to_hsv(bg_hexstr)
@@ -161,11 +174,11 @@ def low_contrast(hexstr, bg_hexstr, weight=WEIGHT):
 
 
 def very_high_contrast(hexstr, bg_hexstr, weight=WEIGHT):
-    return high_contrast(hexstr, bg_hexstr, weight*2)
+    return high_contrast(hexstr, bg_hexstr, weight * 2)
 
 
 def very_low_contrast(hexstr, bg_hexstr, weight=WEIGHT):
-    return low_contrast(hexstr, bg_hexstr, weight*2)
+    return low_contrast(hexstr, bg_hexstr, weight * 2)
 
 
 def lerp(a, b, t):

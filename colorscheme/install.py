@@ -55,11 +55,16 @@ def main():
     parser.add_argument(
         "-t", "--theme", choices=("light", "dark"), default="dark"
     )
+    parser.add_argument(
+        "-C", "--high-contrast", action="store_true", default=False
+    )
 
     args = parser.parse_args()
 
     theme = colorscheme.DARK if args.theme == "dark" else colorscheme.LIGHT
-    pallette = colorscheme.TerminalPallette(theme)
+    pallette = colorscheme.TerminalPallette(
+        theme, high_contrast=args.high_contrast
+    )
     pallette.process()
 
     create_environment_file(pallette.env)
