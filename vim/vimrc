@@ -1,25 +1,7 @@
-let enable_ycm=1
-
-call plug#begin()
-Plug 'Yggdroot/indentLine'
-Plug 'fenetikm/falcon'
-Plug 'morhetz/gruvbox'
-Plug 'itchyny/lightline.vim'
-Plug 'tikhomirov/vim-glsl'
-Plug 'tpope/vim-surround'
-Plug 'vim-syntastic/syntastic'
-Plug 'Chiel92/vim-autoformat'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-if enable_ycm
-    Plug 'ycm-core/YouCompleteMe'
-endif
-call plug#end()
-
 syntax on
 filetype plugin indent on
 set path=.,**
+set tags+=$CTAGS
 set clipboard=unnamedplus
 set nocompatible
 set relativenumber
@@ -43,90 +25,22 @@ set foldmethod=indent
 set foldlevelstart=99
 set foldnestmax=2
 set foldminlines=1
-highlight ColorColumn ctermbg=0 guibg=lightgray
 
-" KEY MAPPINGS
-let mapleader = " "
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>wq :wq<CR>
-nnoremap <Leader>Q :q!<CR>
-nnoremap <Leader>vc :sp $MYVIMRC<CR>
-nnoremap <Leader>so :source $MYVIMRC<CR>
-nnoremap <Leader>f :Autoformat<CR>
-nnoremap <F9> :lfirst<CR>
-nnoremap <F10> :lnext<CR>
-nnoremap <F12> :setlocal spell! spelllang=en_us<CR>
-
-" folds
-nnoremap <Leader>O zR
-nnoremap <Leader>C zM
-nnoremap <Leader>o zo
-nnoremap <Leader>c zc
-
-" run script
-nnoremap <Leader><CR> :!python3 %<CR>
-
-" from the cursor, delete the remainder of the line and paste it 
-" at the start of the next line
-nnoremap <Leader>br i<CR><Esc>ji<Backspace><Esc>^
-
-" copy to and from system keyboard (ctrl+c, ctrl+v) outside of vim
-" note: this wont work with vim-minimal
-nnoremap <Leader>y "+y
-nnoremap <Leader>p "+p
-
-" escape normal mode with jj/kk
-inoremap jj <Esc>
-inoremap kk <Esc>
-
-" separate shell command options to new lines
-nnoremap <C-Down> ^/<Space>-<CR>f-i\<CR><Esc>
-nnoremap <C-Up> I<Backspace><Backspace><Backspace><Backspace><Space><Esc>
-" reload the current buffer
-nnoremap <C-r> :edit %<CR>
-inoremap <C-p> @property<CR>def (self):<Esc>Bi
-inoremap <C-f> @pytest.fixture<CR>def ():<Esc>Bi
-nnoremap <C-s> :%s//g<Left><Left>
-nnoremap <C-m> gg/import<CR>
-
-" CONFIG PLUGINS
-" visual
-let &t_ut='' " fix for kitty terminal emulator bg-color conflict
-set background=dark
-let g:gruvbox_contrast_dark = 'medium'
-colorscheme gruvbox
-let g:lightline = {'colorscheme': 'gruvbox'}
-
-" code formatting and linting
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_c_checkers = ['clang']
-let g:formatters_python = ['black']
-let g:formatters_c = ['clang-format']
-let g:autoformat_autoindent = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1 
-
-" syntastic suggested default config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-" visual aid for indentation
-let g:indentLine_char = "."
-
-if enable_ycm
-    nnoremap <F5> :YcmCompleter RefactorRename 
-    let g:ycm_autoclose_preview_window_after_completion=1
+" I'll have to test this against other environments sometime in the future
+if $TERM == 'xterm-kitty'
+    " use terminal background
+    set t_ut= 
+    " fix to strange garbage characters getting displayed when
+    " opening up certain buffers
+    set t_RV=
+    colorscheme mycolors
 endif
 
-
-" autocommands
 augroup vimrc
-    autocmd!
+    au!
     " center the screen upon entering insert mode
-    autocmd InsertEnter * normal zz
+    au InsertEnter * normal zz
 augroup END
 
+runtime plugins.vim
+runtime keybinds.vim

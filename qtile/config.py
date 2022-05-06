@@ -89,8 +89,8 @@ keys = [
 
 theme = {
     "border_width": 3,
-    "border_focus": os.environ["COLORSCHEME_ORANGE_L"],
-    "border_normal": os.environ["COLORSCHEME_BG_L"],
+    "border_focus": os.environ["xCS_STRUCTURE"],
+    "border_normal": os.environ["xCS_STRUCTURE_c"],
     "margin": 0,
 }
 
@@ -131,6 +131,7 @@ widget_defaults = dict(
     font="Fira Code",
     fontsize=16,
     padding=6,
+    foreground=os.environ["xCS_FOREGROUND"],
 )
 extension_defaults = widget_defaults.copy()
 
@@ -138,20 +139,20 @@ extension_defaults = widget_defaults.copy()
 def create_widgets():
     return [
         widget.GroupBox(
-            active=os.environ["COLORSCHEME_FG_L"],
-            inactive=os.environ["COLORSCHEME_FG_L"],
-            foreground=os.environ["COLORSCHEME_FG_L"],
+            active=os.environ["xCS_FOREGROUND"],
+            inactive=os.environ["xCS_FOREGROUND"],
+            foreground=os.environ["xCS_FOREGROUND"],
             background=None,
             border_width=0,
             center_aligned=True,
             font="Fira Code",
-            fontshadow=os.environ["COLORSCHEME_BG_D"],
+            fontshadow=os.environ["xCS_BACKGROUND"],
             fontsize=None,
             highlight_method="block",
-            this_current_screen_border=os.environ["COLORSCHEME_ORANGE_D"],
-            this_screen_border=os.environ["COLORSCHEME_ORANGE_D"],
-            other_current_screen_border=os.environ["COLORSCHEME_BLUE_D"],
-            other_screen_border=os.environ["COLORSCHEME_BLUE_D"],
+            this_current_screen_border=os.environ["xCS_STRUCTURE"],
+            this_screen_border=os.environ["xCS_STRUCTURE"],
+            other_current_screen_border=os.environ["xCS_EMPHASIS"],
+            other_screen_border=os.environ["xCS_EMPHASIS"],
             padding_y=0,
             padding_x=10,
             rounded=False,
@@ -167,7 +168,7 @@ def create_widgets():
 
 bar_config = {
     "size": 30,
-    "background": os.environ["COLORSCHEME_BG_M"],
+    "background": os.environ["xCS_BACKGROUND"],
     "margin": 0,
     "opacity": 1,
 }

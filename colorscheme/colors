@@ -1,0 +1,25 @@
+lines not starting with '#' or "!" are ignored
+
+possible line formattings:
+
+    (A) A 6 DIGIT HEX STRING FOLLOWED BY A CODE [16-255]
+        "#hexstr code" -> #0f0f0f 100
+
+    (B) A NAMED COLOR CLASS FOLLOWED BY A COLOR TO DERIVE IT FROM
+        "!emphasis red"  --  black red green blue cyan magenta yellow white from base 16
+        "!emphasis #hx"  --  6 digit hex literal preceded by '#'
+        "!emphasis 100"  --  [0-255] color that had been mapped from (A) format
+        
+        given an "!emphasis red" line the generator will expand this into
+        environment variables with variants like the following:
+            $CS_EMPHASIS     --  plain option (set to a value [0-255])
+            $CS_EMPHASIS_C   --  *_C increased contrast
+            $CS_EMPHASIS_CC  --  *_CC double increased contrast
+            $CS_EMPHASIS_c   --  *_c decreased contrast
+            $CS_EMPHASIS_cc  --  *_cc double decreased contrast
+            $xCS_EMPHASIS_*  --  prefix with 'x' for hex literal value
+
+!structure   magenta
+!important   red
+!emphasis    yellow
+!interactive blue

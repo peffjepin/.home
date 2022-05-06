@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 
-import subprocess
 import pathlib
-import shlex
+import shutil
 import os
 
 from dataclasses import dataclass
-from subprocess import DEVNULL
 
 
 BASE = pathlib.Path(__file__).parent
 DEPS = BASE / "deps"
 BACKUP = BASE / "backup"
+PKG_IGNORE = ""
 
 
 @dataclass
@@ -31,16 +30,14 @@ class PackageManager:
     @classmethod
     def get_for_system(cls):
         for pm in cls.__subclasses__():
-            cmd = shlex.split(f"which {pm.name}")
-            p = subprocess.run(cmd, stdout=DEVNULL, stderr=DEVNULL)
-            if p.returncode == 0:
+            if shutil.which(pm.name) is not None:
+                print(f"Detected PackageManager -> {pm.name}")
                 return pm
-
         raise ValueError("Could not determine which package manager to use.")
 
 
 class AptGet(PackageManager):
-    lookup = {"qtile": ""}
+    lookup = {"qtile": PKG_IGNORE}
     name = "apt-get"
     install = "apt-get update && apt-get install"
 
@@ -58,5 +55,5 @@ def install_software(*packages: str):
 
 if __name__ == "__main__":
     with open("packages", "r") as f:
-        packages = (l.strip() for l in f.readlines())
+        packages = (ln.strip() for ln in f.readlines())
     install_software(*packages)

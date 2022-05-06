@@ -1,0 +1,37 @@
+lines not starting in # are ignored by parser
+
+convention: first color is normal version
+            second color is bright version
+
+
+black
+#161A23 0
+#3d424d 8
+
+red
+#a14b2f 1
+#cf613d 9
+
+green
+#76ad93 2 
+#8ad5b1 10
+
+yellow
+#c7a321 3 
+#e9bc20 11
+
+blue
+#4475ad 4 
+#5990cd 12
+
+magenta
+#725c97 5 
+#846cac 13
+
+cyan
+#659791 6 
+#84bdb6 14
+
+white
+#b6bebf 7 
+#b7c9cd 15

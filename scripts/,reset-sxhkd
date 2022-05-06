@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 killall sxhkd
-nohup sxhkd -c ~/.config/sxhkd/sxhkdrc &
+sxhkd -c ~/.config/sxhkd/sxhkdrc &

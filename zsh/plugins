@@ -5,15 +5,51 @@ DEPS=$HOME/.home/deps
 
 # Prompt customization
 fpath+=$DEPS/pure
-PURE_PROMPT_SYMBOL='$'
+PURE_PROMPT_SYMBOL='>'
 PURE_PROMPT_VICMD_SYMBOL='vi'
 autoload -U promptinit; promptinit
 prompt pure
-zstyle :prompt:pure:path color white
-zstyle ':prompt:pure:prompt:*' color $COLORSCHEME_GREEN_L
+zstyle :prompt:pure:execution_time color $CS_INTERACTIVE
+zstyle :prompt:pure:git:arrow color $CS_IMPORTANT
+zstyle :prompt:pure:git:stash color $CS_IMPORTANT
+zstyle :prompt:pure:git:branch color $CS_FOREGROUND_c
+zstyle :prompt:pure:git:branch:cached color $CS_EMPHASIS_c
+zstyle :prompt:pure:git:action color $CS_IMPORTANT
+zstyle :prompt:pure:git:dirty color $CS_IMPORTANT
+zstyle :prompt:pure:host color $CS_EMPHASIS_c
+zstyle :prompt:pure:user color $CS_EMPHASIS_c
+zstyle :prompt:pure:user:root color $CS_EMPHASIS_C
+zstyle :prompt:pure:path color $CS_FOREGROUND
+zstyle :prompt:pure:prompt:error color $CS_IMPORTANT
+zstyle :prompt:pure:prompt:success color $CS_INTERACTIVE_C
+zstyle :prompt:pure:prompt:continuation color $CS_INTERACTIVE_c
+zstyle :prompt:pure:suspended_jobs color $CS_IMPORTANT
+zstyle :prompt:pure:virtualenv color $CS_STRUCTURE_c
 # end prompt
 
 fpath=($DEPS/zsh-completions/src $fpath)
 source $DEPS/zsh-autosuggestions/zsh-autosuggestions.zsh
 # IMPORTANT: this one should be last
 source $DEPS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$CS_FOREGROUND_cc"
+
+typeset -A ZSH_HIGHLIGHT_STYLES
+
+ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=$CS_IMPORTANT_c"
+ZSH_HIGHLIGHT_STYLES[alias]="fg=$CS_INTERACTIVE"
+ZSH_HIGHLIGHT_STYLES[builtin]="fg=$CS_INTERACTIVE"
+ZSH_HIGHLIGHT_STYLES[function]="fg=$CS_INTERACTIVE"
+ZSH_HIGHLIGHT_STYLES[command]="fg=$CS_INTERACTIVE"
+ZSH_HIGHLIGHT_STYLES[redirection]="fg=$CS_EMPHASIS"
+ZSH_HIGHLIGHT_STYLES[globbing]="fg=$CS_IMPORTANT"
+ZSH_HIGHLIGHT_STYLES[path]="fg=$CS_INTERACTIVE_c"
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]="fg=$CS_EMPHASIS"
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]="fg=$CS_EMPHASIS"
+ZSH_HIGHLIGHT_STYLES[default]="fg=$CS_FOREGROUND"
+
+if command -v mcfly >/dev/null 2>&1; then
+    source /usr/share/doc/mcfly/mcfly.zsh
+fi

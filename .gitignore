@@ -1,4 +1,5 @@
 nohup.out
+__pycache__
 vim/.netrwhist
 zsh/history
 zsh/.zcompdump

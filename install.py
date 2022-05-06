@@ -7,6 +7,7 @@ import shutil
 BASE = pathlib.Path(__file__).parent.resolve()
 HOME = pathlib.Path.home()
 DEPS = BASE / "deps"
+CLRS = BASE / "colorscheme"
 BACKUP = BASE / "backup"
 
 
@@ -21,6 +22,7 @@ repos = (
 symlinks = (
     ("vim", ".vim"),
     ("zsh/.zshenv", ".zshenv"),
+    ("colorscheme", ".config/colorscheme"),
     ("zsh", ".config/zsh"),
     ("kitty", ".config/kitty"),
     ("scripts", "scripts"),
@@ -29,21 +31,24 @@ symlinks = (
 )
 
 
-def make_symlink(file, target):
+def make_symlink(file, dest):
     init_path = BASE / file
-    target_path = HOME / target
-    
-    if target_path.is_symlink():
-        target_path.unlink()
-    elif target_path.exists():
-        print(f"backing up {target_path}")
-        backup_path = BACKUP / target
-        backup_path.parent.mkdir(exist_ok=True, parents=True)
-        shutil.move(target_path, backup_path)
+    dest_path = HOME / dest
 
-    print(target_path.exists())
-    print(f"creating symlink: {init_path} -> {target_path}")
-    target_path.symlink_to(init_path)
+    if dest_path.is_symlink():
+        dest_path.unlink()
+    elif dest_path.exists():
+        backup_path = BACKUP / dest
+        move_to_backup_directory(dest_path, backup_path)
+
+    print(f"creating symlink: {init_path} -> {dest_path}")
+    dest_path.symlink_to(init_path)
+
+
+def move_to_backup_directory(filepath, backup_path):
+    print(f"moving {filepath} to backup directory")
+    backup_path.parent.mkdir(exist_ok=True, parents=True)
+    shutil.move(filepath, backup_path)
 
 
 def clone_repo(url):
@@ -53,5 +58,5 @@ def clone_repo(url):
 if __name__ == "__main__":
     for url in repos:
         clone_repo(url)
-    for pair in symlinks:
-        make_symlink(*pair)
+    for (file, dest) in symlinks:
+        make_symlink(file, dest)

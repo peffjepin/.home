@@ -14,7 +14,7 @@ export BACKGROUND=$HOME/.config/background
 export VENV_HOME=$HOME/virtual_environments
 
 # Source other files
-source $ZDOTDIR/colorscheme
+source $HOME/.config/colorscheme/env
 source $ZDOTDIR/paths
 source $ZDOTDIR/plugins
 source $ZDOTDIR/functions

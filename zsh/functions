@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 png2ico () {
     local i="${1}" o="${2:-${1:r}.ico}" s="${png2ico_size:-256}"
     convert \
@@ -8,3 +10,31 @@ png2ico () {
         -colors 256 \
         -background transparent "$o"
 }
+
+
+gitignore() {
+    if [ "$#" -eq 0 ]; then
+        cat .gitignore
+    else
+        echo $1 >> .gitignore && sort -o .gitignore .gitignore
+    fi
+}
+
+
+help() {
+    if [ $# -eq 1 ]; then
+        $1 --help  | less
+    else
+        $1 --help | grep -i "$2"
+    fi
+}
+
+
+vimx() {
+    vim "$1"
+    if test -f "$1"; then
+        chmod +x "$1"
+    fi
+}
+
+

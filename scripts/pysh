@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+
+import sys
+from pprint import pprint
+
+cmd = sys.argv[1]
+
+if sys.stdin.isatty():
+    exec(cmd)
+else:
+    stdin = sys.stdin.read()
+    exec(cmd)
