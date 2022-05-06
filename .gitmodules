@@ -1,0 +1,12 @@
+[submodule "deps/zsh-autosuggestions"]
+	path = deps/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "deps/zsh-syntax-highlighting"]
+	path = deps/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "deps/zsh-completions"]
+	path = deps/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
+[submodule "deps/pure"]
+	path = deps/pure
+	url = https://github.com/sindresorhus/pure

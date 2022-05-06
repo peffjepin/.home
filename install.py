@@ -1,22 +1,11 @@
 #!/usr/bin/env python3
 
-import os
 import pathlib
 import shutil
 
 BASE = pathlib.Path(__file__).parent.resolve()
 HOME = pathlib.Path.home()
-DEPS = BASE / "deps"
-CLRS = BASE / "colorscheme"
 BACKUP = BASE / "backup"
-
-
-repos = (
-    "https://github.com/zsh-users/zsh-autosuggestions",
-    "https://github.com/zsh-users/zsh-syntax-highlighting",
-    "https://github.com/zsh-users/zsh-completions",
-    "https://github.com/sindresorhus/pure",
-)
 
 # links to make: (relative to .git, relative to $HOME)
 symlinks = (
@@ -52,12 +41,6 @@ def move_to_backup_directory(filepath, backup_path):
     shutil.move(filepath, backup_path)
 
 
-def clone_repo(url):
-    os.system(f"cd {DEPS} && git clone {url}")
-
-
 if __name__ == "__main__":
-    for url in repos:
-        clone_repo(url)
     for (file, dest) in symlinks:
         make_symlink(file, dest)
