@@ -77,10 +77,6 @@ class TerminalPallette:
         )
 
     def _process_color_definitions(self):
-        self.colors = {
-            code: color
-            for color, code in map(str.split, self._definition_lines)
-        }
         for color, code in map(str.split, self._definition_lines):
             if self._high_contrast and (code != self._bg_color_code):
                 self.colors[code] = contrast_against_theme(color, self._theme)
