@@ -17,13 +17,24 @@ if command -v bat >/dev/null 2>&1; then
     alias cat="bat --paging=never"
     alias view="bat"
 else
-    alias view="cat | less"
+    alias view="less"
+fi
+
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+    alias cd="z"
 fi
 
 alias dark-theme="cd ~/.home/colorscheme && ./install.py && cd - >/dev/null"
 alias light-theme="cd ~/.home/colorscheme && ./install.py -t=light && cd - >/dev/null"
 
-alias .env="source .env"
+alias aliases="vim ~/.config/zsh/aliases && unalias -m '*' && source ~/.config/zsh/aliases"
+alias functions="vim ~/.config/zsh/functions && source ~/.config/zsh/functions"
+alias vimrc="vim ~/.vim/vimrc"
+alias zshrc="vim ~/.config/zsh/.zshrc && source ~/.config/zsh/.zshrc"
+alias packages="vim ~/.home/packages"
+
+alias .env="source .devenv"
 alias gcl="git clone"
 alias gs="git status"
 alias gc="git commit"
@@ -36,11 +47,6 @@ alias clean="make clean"
 
 alias mkexe="chmod +x"
 
-alias aliases="vim ~/.config/zsh/aliases && unalias -m '*' && source ~/.config/zsh/aliases"
-alias functions="vim ~/.config/zsh/functions && source ~/.config/zsh/functions"
-alias vimrc="vim ~/.vim/vimrc"
-alias zshrc="vim ~/.config/zsh/.zshrc && source ~/.config/zsh/.zshrc"
-
 alias venv=". venv/bin/activate"
 alias tdd="python ~/dev/autotest/tdd.py"
 alias gamelib="cd ~/dev/gamelib && source .env"
@@ -50,7 +56,7 @@ alias gamelib-install="gamelib && pip install ."
 alias gamelib-ipython="gamelib-install && clear && ipython"
 alias peffjepin.com="cd ~/dev/portfolio && venv"
 
-alias pytree="tree -I __pycache__ -I dist -I build -I *.egg-info | less"
+alias pytree="tree -I __pycache__ -I dist -I build -I *.egg-info"
 alias pyclean="rm -rf *.egg-info build dist"
 
 alias lsa="ls -lah --color=auto"

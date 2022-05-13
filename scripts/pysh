@@ -2,9 +2,11 @@
 
 import sys
 import argparse
+import pathlib
 
 _print = print
 imports = ["import numpy as np"]
+cwd = pathlib.Path.cwd()
 
 
 def main(args):
