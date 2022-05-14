@@ -1,14 +1,13 @@
 let g:enable_ycm=1
 
 call plug#begin()
-Plug 'Yggdroot/indentLine'
 Plug 'itchyny/lightline.vim'
 Plug 'tikhomirov/vim-glsl'
 Plug 'vim-syntastic/syntastic'
 Plug 'Chiel92/vim-autoformat'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'skywind3000/asyncrun.vim'
+Plug 'airblade/vim-rooter'
+Plug 'junegunn/fzf.vim'
 if g:enable_ycm
     Plug 'ycm-core/YouCompleteMe'
 endif
@@ -52,3 +51,5 @@ let g:lightline = {
 " this disabling and renabling fixes that problem
 call lightline#disable()  
 call lightline#enable()
+
+let g:rooter_patters = ['.git']
