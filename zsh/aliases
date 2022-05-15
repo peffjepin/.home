@@ -28,6 +28,7 @@ fi
 alias dark-theme="cd ~/.home/colorscheme && ./install.py && cd - >/dev/null"
 alias light-theme="cd ~/.home/colorscheme && ./install.py -t=light && cd - >/dev/null"
 
+alias home="cd ~/.home"
 alias aliases="vim ~/.config/zsh/aliases && unalias -m '*' && source ~/.config/zsh/aliases"
 alias functions="vim ~/.config/zsh/functions && source ~/.config/zsh/functions"
 alias vimrc="vim ~/.vim/vimrc"

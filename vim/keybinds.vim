@@ -42,5 +42,17 @@ inoremap <C-p> @property<CR>def (self):<Esc>Bi
 inoremap <C-f> @pytest.fixture<CR>def ():<Esc>Bi
 nnoremap <C-s> :%s//g<Left><Left>
 
+" fuzzy finding
 nnoremap <S-Tab> :Files<CR>
 nnoremap <Leader>/ :Rg<CR>
+
+" copy to xclip default system keyboard
+vnoremap <S-Y> :w !xclip -selection c<CR><CR>gvy
+vnoremap <S-D> :!xclip -selection c<CR><CR>
+nnoremap <S-Y><S-Y> yy:call system('xclip -selection c', @0)<CR>
+nnoremap <S-D><S-D> yy:call system('xclip -selection c', @0)<CR>dd
+
+nnoremap { {{
+nnoremap } }}
+nnoremap n nzz
+nnoremap N Nzz
