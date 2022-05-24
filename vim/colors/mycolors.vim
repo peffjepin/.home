@@ -35,7 +35,7 @@ call s:HL("Exception",      $CS_IMPORTANT_c)
 call s:HL("Repeat",         $CS_EMPHASIS_c)
 call s:HL("Conditional",    $CS_EMPHASIS_c)
 call s:HL("Label",          $CS_IMPORTANT_c)
-call s:HL("Function",       $CS_STRUCTURE_C)
+call s:HL("Function",       $CS_STRUCTURE)
 " PreProc: Include Define Macro PreCondit
 call s:HL("PreProc",        $CS_INTERACTIVE_c)  
 " Constant: Character Bolean Number Float String
@@ -49,8 +49,8 @@ call s:HL("Special",        $CS_EMPHASIS_c)
 
 call s:HL("FunctionExit",   $CS_IMPORTANT)
 call s:HL("ControlFlow",    $CS_EMPHASIS)
-call s:HL("DefinitionClass",$CS_STRUCTURE_C)
-call s:HL("DefinitionName", $CS_STRUCTURE_CC)
+call s:HL("DefinitionClass",$CS_STRUCTURE)
+call s:HL("DefinitionName", $CS_STRUCTURE_C)
 call s:HL("Documentation",  $CS_STRUCTURE_cc)
 
 

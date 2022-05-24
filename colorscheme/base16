@@ -5,33 +5,33 @@ convention: first color is normal version
 
 
 black
-#161A23 0
-#3d424d 8
+#282828 0
+#282828 8
 
 red
-#a14b2f 1
-#cf613d 9
+#b3312d 1
+#b3312d 9
 
 green
-#76ad93 2 
-#8ad5b1 10
+#a8b32d 2 
+#a8b32d 10
 
 yellow
-#c7a321 3 
-#e9bc20 11
+#bfac60 3 
+#bfac60 11
 
 blue
-#4475ad 4 
-#5990cd 12
+#2dacb3 4 
+#2dacb3 12
 
 magenta
-#725c97 5 
-#846cac 13
+#b35981 5 
+#b35981 13
 
 cyan
-#659791 6 
-#84bdb6 14
+#59b38a 6 
+#59b38a 14
 
 white
-#b6bebf 7 
-#b7c9cd 15
+#ccbaa1 7 
+#ccbaa1 15

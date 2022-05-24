@@ -38,8 +38,6 @@ nnoremap <C-Up> I<Backspace><Backspace><Backspace><Backspace><Space><Esc>
 
 " reload the current buffer
 nnoremap <C-r> :edit %<CR>
-inoremap <C-p> @property<CR>def (self):<Esc>Bi
-inoremap <C-f> @pytest.fixture<CR>def ():<Esc>Bi
 nnoremap <C-s> :%s//g<Left><Left>
 
 " fuzzy finding
@@ -56,3 +54,10 @@ nnoremap { {{
 nnoremap } }}
 nnoremap n nzz
 nnoremap N Nzz
+
+inoremap <C-p> @property<CR>def (self):<Esc>Bi
+inoremap <C-f> @pytest.fixture<CR>def ():<Esc>Bi
+inoremap <C-t> def test_<CR><Tab>raise NotImplementedError()<Esc>kA():<Esc>2hi
+nnoremap test idef test_<CR><Tab>raise NotImplementedError()<Esc>kA():<Esc>2hi
+
+nnoremap <Leader><Leader>pt i@pytest.mark.parametrize("param1", (val1,))<CR>def test_(param1):<CR>    raise NotImplementedError()<Esc>kF_a

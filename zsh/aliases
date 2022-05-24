@@ -32,6 +32,7 @@ alias home="cd ~/.home"
 alias aliases="vim ~/.config/zsh/aliases && unalias -m '*' && source ~/.config/zsh/aliases"
 alias functions="vim ~/.config/zsh/functions && source ~/.config/zsh/functions"
 alias vimrc="vim ~/.vim/vimrc"
+alias vimkb="vim ~/.vim/keybinds.vim"
 alias zshrc="vim ~/.config/zsh/.zshrc && source ~/.config/zsh/.zshrc"
 alias packages="vim ~/.home/packages"
 

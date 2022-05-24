@@ -2,10 +2,9 @@ if exists("b:current_syntax")
     finish
 endif
 
-syn keyword PyControl for while if elif else try except finally
+syn keyword PyControl for while if elif else try except finally continue break
 syn keyword PyFunctionExit return yield raise assert
 syn keyword PyInclude import from 
-syn keyword PyKeyword in or and None True False with is not as del global nonlocal lambda pass
 
 syn match PyString +".\{-}"+
 syn match PyString +'.\{-}'+
