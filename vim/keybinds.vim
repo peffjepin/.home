@@ -13,6 +13,7 @@ nnoremap <Leader>f :Autoformat<CR>
 nnoremap <F9> :lfirst<CR>
 nnoremap <F10> :lnext<CR>
 nnoremap <F12> :setlocal spell! spelllang=en_us<CR>
+nnoremap r :redo<CR>
 
 nnoremap <Leader>h <C-w><h>
 nnoremap <Leader>l <C-w><l>
