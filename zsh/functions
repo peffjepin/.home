@@ -46,3 +46,8 @@ ghcl() {
 check-sha256() {
     sha256sum $1 | pysh "print(stdin.split()[0].lower() == \"$2\".lower())"
 }
+
+crun() {
+    gcc -o .tmpmain $1 && ./.tmpmain
+    rm -f ./.tmpmain
+}

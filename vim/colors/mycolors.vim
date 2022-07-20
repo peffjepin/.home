@@ -4,7 +4,7 @@ endif
 
 let g:colors_name='mycolors'
 
-function! s:HL(group, fg, ...) 
+function! s:HL(group, fg, ...)
     " Optionally specify background
     if a:0 >= 1
         let bg = a:1
@@ -22,7 +22,7 @@ function! s:HL(group, fg, ...)
     execute strcmd
 endfunction
 
-call s:HL("ColorColumn",    $CS_FOREGROUND, $CS_STRUCTURE_cc)
+call s:HL("ColorColumn",    $CS_FOREGROUND, $CS_FOREGROUND_cc)
 call s:HL("SignColumn",     $CS_FOREGROUND)
 call s:HL("LineNr",         $CS_STRUCTURE_c)
 call s:HL("MatchParen",     $CS_IMPORTANT_CC)
@@ -37,7 +37,7 @@ call s:HL("Conditional",    $CS_EMPHASIS_c)
 call s:HL("Label",          $CS_IMPORTANT_c)
 call s:HL("Function",       $CS_STRUCTURE)
 " PreProc: Include Define Macro PreCondit
-call s:HL("PreProc",        $CS_INTERACTIVE_c)  
+call s:HL("PreProc",        $CS_INTERACTIVE_c)
 " Constant: Character Bolean Number Float String
 call s:HL("Constant",       $CS_FOREGROUND_c)
 call s:HL("String",         $CS_FOREGROUND_c)
