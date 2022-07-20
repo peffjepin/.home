@@ -44,6 +44,7 @@ alias gcm="git commit -m"
 alias ga="git add"
 alias gau="git add -u"
 alias gd="git diff"
+alias gitlines="git ls-files | xargs wc -l"
 
 alias clean="make clean"
 

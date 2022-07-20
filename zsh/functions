@@ -51,3 +51,7 @@ crun() {
     gcc -o .tmpmain $1 && ./.tmpmain
     rm -f ./.tmpmain
 }
+
+gitreplace() {
+    git ls-files | xargs sed -i "s/$1/g"
+}
